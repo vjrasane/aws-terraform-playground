@@ -7,7 +7,7 @@ locals {
     "eu-north-1a",
     "eu-north-1b",
   ]
-  eks_version  = "1.29"
+  eks_version = "1.32"
 }
 
 
