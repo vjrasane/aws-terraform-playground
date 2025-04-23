@@ -28,3 +28,11 @@ aws sts assume-role --role-arn arn:aws:iam::838319850436:role/staging-demo-admin
 role_arn = arn:aws:iam::838319850436:role/staging-demo-admin-role 
 source_profile = ville
 ```
+
+```shell
+kubectl get pods -n kube-system
+```
+
+```shell
+kubectl logs -l app.kubernetes.io/instance=metrics-server -f -n kube-system
+```

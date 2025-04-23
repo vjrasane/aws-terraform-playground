@@ -83,7 +83,9 @@ resource "aws_iam_user_policy_attachment" "developer_user_policy" {
 resource "aws_eks_access_entry" "developer" {
   cluster_name      = aws_eks_cluster.eks.name
   principal_arn     = aws_iam_user.developer_user.arn
-  kubernetes_groups = ["viewer-group"]
+  kubernetes_groups = [local.cluster_viewer_group]
+
+  depends_on = [kubernetes_cluster_role_binding.viewer_role_to_group]
 }
 
 data "aws_caller_identity" "current" {
@@ -161,5 +163,7 @@ resource "aws_iam_user_policy_attachment" "manager" {
 resource "aws_eks_access_entry" "manager" {
   cluster_name      = aws_eks_cluster.eks.name
   principal_arn     = aws_iam_role.eks_admin_role.arn
-  kubernetes_groups = ["admin-group"]
+  kubernetes_groups = [local.cluster_admin_group]
+
+  depends_on = [kubernetes_cluster_role_binding.admin_role_to_group]
 }
