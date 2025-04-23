@@ -18,6 +18,11 @@ resource "aws_eks_cluster" "eks" {
   }
 
   depends_on = [aws_iam_role_policy_attachment.eks_server_policy]
+
+  timeouts {
+    create = "30m"
+    delete = "30m"
+  }
 }
 
 resource "aws_eks_node_group" "eks_node_group" {
@@ -45,5 +50,10 @@ resource "aws_eks_node_group" "eks_node_group" {
 
   lifecycle {
     ignore_changes = [scaling_config[0].desired_size]
+  }
+
+  timeouts {
+    create = "30m"
+    delete = "30m"
   }
 }
